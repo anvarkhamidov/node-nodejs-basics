@@ -7,15 +7,10 @@ const create = async () => {
     const fp = path.join(__dirname, "files", "fresh.txt");
     const content = 'I am fresh and young'
 
-    fs.access(fp, fs.constants.F_OK, (err) => {
-        if (err)
-            fs.writeFile(fp, content, (err) => {
-                if (err)
-                    console.log(err)
-
-            });
-        else
+    fs.writeFile(fp, content, { flag: "wx" }, (err) => {
+        if (err) {
             throw new Error("FS operation failed")
+        }
     })
 };
 
